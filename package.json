@@ -38,6 +38,7 @@
     "余聪",
     "watermark",
     "observer",
+    "detect",
     "watermark-observer"
   ],
   "main": "lib",
