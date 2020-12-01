@@ -1,6 +1,6 @@
 {
   "name": "watermark-observer",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Watermark effect with dom observer",
   "author": "余聪 <yucong06@meituan.com>",
   "cdn": "dist/index.production.js",
