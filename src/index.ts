@@ -68,11 +68,19 @@ export function watermarkObserverStandalone(
   })
 
   const clonedNode = domElem.cloneNode(true)
+  const parentElement = domElem.parentElement
 
-  let disconnect = observer(domElem, null, (evt) => {
+  let disconnect = observer(domElem, parentElement, (evt) => {
     disconnect()
-    domElem.replaceWith(clonedNode)
-    disconnect = watermarkObserverStandalone(clonedNode as HTMLElement, watermarkSource, { document })
+
+    // remove
+    if (evt.type === 'DOMNodeRemoved') {
+      parentElement.appendChild(clonedNode)
+      disconnect = watermarkObserverStandalone(clonedNode as HTMLElement, watermarkSource, { document })
+    } else {
+      domElem.replaceWith(clonedNode)
+      disconnect = watermarkObserverStandalone(clonedNode as HTMLElement, watermarkSource, { document })
+    }
   })
 
   return () => {
@@ -94,7 +102,7 @@ export default function watermarkObserver(
   const inlineStyle = domElem.getAttribute('style')
   let oldStyle = styleToJs(inlineStyle)
 
-  return observer(domElem, null, (evt) => {
+  return observer(domElem, domElem.parentElement, (evt) => {
     Object.assign(domElem.style, { ...oldStyle })
   })
 }

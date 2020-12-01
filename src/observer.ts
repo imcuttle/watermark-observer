@@ -55,7 +55,10 @@ export const observer = (target: HTMLElement, container: HTMLElement | null, cal
         })
       })
     })
-    containerObserver.observe(container, { childList: true, subtree: true })
+    containerObserver.observe(container, {
+      childList: target.parentElement === container,
+      subtree: container.contains(target) && target.parentElement !== container
+    })
   }
 
   const targetObserver: MutationObserver = new MutationObserver(callback)
