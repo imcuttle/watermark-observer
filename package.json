@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Watermark effect with dom observer",
   "author": "余聪 <yucong06@meituan.com>",
+  "cdn": "dist/index.production.js",
+  "unpkg": "dist/index.production.js",
+  "jsdelivr": "dist/index.production.js",
   "scripts": {
     "test": "npx jest",
     "test:watch": "npm test -- --watch",
@@ -13,7 +16,8 @@
     "build:es": "tsc $TSC_OPTIONS --outDir es --module es6",
     "build:cjs": "tsc $TSC_OPTIONS --outDir lib",
     "build:tds": "tsc $TSC_OPTIONS --emitDeclarationOnly -d",
-    "clean": "rimraf types es lib",
+    "build:umd": "webpack",
+    "clean": "rimraf types es lib dist",
     "prepare": "npm run build",
     "version": "npm run changelog",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md"
@@ -29,10 +33,10 @@
     "node": ">=10"
   },
   "files": [
+    "dist",
     "es",
     "types",
-    "lib",
-    "src"
+    "lib"
   ],
   "keywords": [
     "余聪",
