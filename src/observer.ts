@@ -1,10 +1,7 @@
-declare var WebKitMutationObserver: any
-declare var MozMutationObserver: any
-
 // @ts-ignore
-const MutationObserver = global.MutationObserver || global.WebKitMutationObserver || global.MozMutationObserver
+export const MutationObserver = global.MutationObserver || global.WebKitMutationObserver || global.MozMutationObserver
 
-type Callback = (evt: Event & { mutation?: MutationRecord }) => void
+export type Callback = (evt: Event & { mutation?: MutationRecord }) => void
 
 function bindMutationEvent(target: HTMLElement, container: HTMLElement | null, callback: Callback) {
   const eventList = [
